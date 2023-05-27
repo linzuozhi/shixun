@@ -31,8 +31,7 @@
 </template>
 
 <script>
-import * as THREE from 'three'
-import BIRDS from 'vanta/src/vanta.birds'
+
 
 import selectdiv from './components/smallcomponents/selectdiv.vue'
 import xiala from './components/smallcomponents/xiala.vue'
@@ -41,17 +40,7 @@ import single from './components/smallcomponents/single.vue'
 import duoxuan from './components/smallcomponents/duoxuan.vue'
 import axios from 'axios'
 export default {
-  // mounted() {
-  //   this.vantaEffect = BIRDS({
-  //     el: this.$refs.vantaRef,
-  //     THREE: THREE
-  //   })
-  // },
-  // beforeDestroy() {
-  //   if (this.vantaEffect) {
-  //     this.vantaEffect.destroy()
-  //   }
-  // },
+  
 
   name: 'App',
   components: {
