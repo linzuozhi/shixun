@@ -1,0 +1,19 @@
+
+#total{
+height: auto;
+
+}
+#window{
+margin-top: 100px;
+margin-left: 400px;
+width: 500px;
+height: 400px;
+/* background-color: bisque; */
+position: relative;
+display: flex;
+}
+#smallwindow{
+margin-top:100px;
+margin-left: 20px;
+
+}
