@@ -1,0 +1,29 @@
+[
+    {
+      "type": "1",
+      "xuanxiang": ["313", "1311"],
+      "questiond": "2"
+    },
+    {
+      "type": "1",
+      "xuanxiang": ["313", "1311"],
+      "questiond": "2"
+    },
+    {
+      "type": "2",
+      "questionf": "312",
+      "hint": "31311"
+    },
+    {
+      "type": "3",
+      "xuanxiang": ["33", "1113"],
+      "questiond": "13"
+    },
+    {
+      "type": "3",
+      "xuanxiang": ["33", "1113"],
+      "questiond": "13"
+    }
+  ]
+
+  
