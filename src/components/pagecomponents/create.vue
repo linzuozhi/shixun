@@ -1,12 +1,13 @@
 <template>
     <div id="create" >
-     
+     <div>
       <!-- <el-button @click=" test" type="primary"  >check</el-button> -->
       <el-button @click="addDiv1" type="primary"  >单选题</el-button>
       <el-button @click="addDiv2" type="primary">填空题</el-button>
       <el-button @click="addDiv3" type="primary">多选题</el-button>
       <el-button @click="shanchu" type="primary">删除</el-button>
       <el-button @click="submitData" type="primary">完成</el-button>
+    </div>
       <!-- <div v-for="(div, index) in div1" :key="index" >
         
         <single class="putcen"></single>
@@ -17,7 +18,7 @@
       <div v-for="(div, index) in div3" :key="index" >
         <duoxuan class="putcen"></duoxuan>
       </div> -->
-      <el-input v-model="questionnaire.title" id="titleinput"></el-input>
+      <el-input v-model="questionnaire.title" id="titleinput" placeholder="请输入问卷标题"></el-input>
       <div v-for="(div, index) in divs" :key="index" class="putcen">
       <component :is="div" @a="trya" @b="trya" @c="trya"></component>
     </div>
@@ -63,7 +64,7 @@ import duoxuan from '../smallcomponents/duoxuan.vue'
 
         },
         form:[],
-        numofques:''
+        
         // test:"asfsdfsfss",
       }
     },
@@ -184,6 +185,8 @@ width: 600px;
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    /* display: flex;  */
+    flex-wrap: wrap; justify-content: center; align-items: center;
     /* display: grid;
     place-items: center;
     height: 0vh; */

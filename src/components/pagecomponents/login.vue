@@ -1,6 +1,8 @@
 <template>
 <div id="total">
- <el-button @click="submitData"></el-button>
+  <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
+    <el-button type="primary" @click="postData">提交</el-button>
+ <!-- <el-button @click="submitData" >测试</el-button> -->
 
 
 
@@ -51,6 +53,7 @@
 export default {
   data() {
     return {
+      inputLink:"",
       sendData:{
       id:"",
       username:"",
@@ -143,7 +146,24 @@ export default {
     // 其他处理逻辑...
   },
  
+  postData() {
     
+
+      this.$http.post("localhost:9090/create", this.inputLink)
+        .then(response => {
+          if (response.data === 0) {
+            alert('链接无效');
+            this.inputValue = '';
+          } else {
+            const linkString = response.data
+this.jsonData = JSON.parse(linkString);
+           
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
     
     
   },
