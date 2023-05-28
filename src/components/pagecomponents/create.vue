@@ -17,7 +17,7 @@
       <div v-for="(div, index) in div3" :key="index" >
         <duoxuan class="putcen"></duoxuan>
       </div> -->
-      <el-input v-model="title" id="titleinput"></el-input>
+      <el-input v-model="questionnaire.title" id="titleinput"></el-input>
       <div v-for="(div, index) in divs" :key="index" class="putcen">
       <component :is="div" @a="trya" @b="trya" @c="trya"></component>
     </div>
@@ -52,7 +52,7 @@ import duoxuan from '../smallcomponents/duoxuan.vue'
         // div1: [],
         // div2:[],
         // div3:[],
-        title:"",
+        
         divs: [],
         record:"",
         questionnaire:{
@@ -147,7 +147,7 @@ tijiaoyuanxing(){
           let link = "localhost:9090/login?id=" + qsid
              console.log(link);
           localStorage.setItem('link', link)
-          this.$router.push('/share')
+          // this.$router.push('/share')
 
           // window.location.href = 'http://localhost:8081/login'
         })
