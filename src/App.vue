@@ -1,5 +1,6 @@
 <template>
   <div id="app" ref="vantaRef" >
+    <Header></Header>
     <router-link to="/"></router-link>
     <router-view></router-view>
     <!-- <router-link to="/create" class="my-link">创建问卷 </router-link>
@@ -38,6 +39,7 @@ import xiala from './components/smallcomponents/xiala.vue'
 import fillin from './components/smallcomponents/fillin.vue'
 import single from './components/smallcomponents/single.vue'
 import duoxuan from './components/smallcomponents/duoxuan.vue'
+import Header from "./components/smallcomponents/header.vue"
 import axios from 'axios'
 export default {
   
@@ -50,6 +52,7 @@ export default {
     fillin,
     single,
     duoxuan,
+    Header,
   },
   data() {
     return {

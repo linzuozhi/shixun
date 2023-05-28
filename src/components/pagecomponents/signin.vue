@@ -17,7 +17,10 @@
       <el-form-item>
         <el-button type="primary" @click="changepage">登录</el-button>
         <el-button @click="resetForm">重置</el-button>
+        <el-button @click="changetosignup">注册</el-button>
+
       </el-form-item>
+      
     </el-form>
   <!-- </el-dialog> -->
 </div>
@@ -56,6 +59,10 @@ components:{
     }
   },
   methods: {
+    changetosignup(){
+      this.$router.push('/signup')
+
+    },
     changepage(){
         this.$router.push('/home')
       },
