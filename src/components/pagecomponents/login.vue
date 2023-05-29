@@ -1,10 +1,8 @@
 <template>
 <div id="total">
   <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
-    <el-button type="primary" @click="postData">提交</el-button>
- <!-- <el-button @click="submitData" >测试</el-button> -->
-
-
+    <el-button type="primary" @click="submitLink">提交</el-button>
+    <el-button type="primary" @click="submitData">完成填写</el-button>
 
   <div v-for="(item, index) in jsonData.questionList" :key="index" >
     
@@ -15,41 +13,28 @@
     </el-radio-group>
   </div>
 
-
-
   <div v-else-if="item.questionType ===2" class="type2">
    <p class="title">填空题：{{ item.title }}    </p>
-   <el-input  :placeholder="item.description" style="background-color: #FFFAFA;" v-model="fillindata.fillinanswer"  @change="savefillindata(item.id, $event)"></el-input>
-    
+   <el-input  :placeholder="item.description" style="background-color: #FFFAFA;" v-model="fillindata.fillinanswer"  @change="savefillindata(item.id, $event)"></el-input>    
   </div>
-
-
 
   <div v-if="item.questionType === 1" class="type3">
     <p  class="title" > 多选题：{{ item.title }}     </p>
     <el-checkbox-group v-model="duoxuandata.chosed" class="checkboxgroup">
         <el-checkbox v-for="(option, i) in item.optionsof" :key="i" :label="i"  @change="saveduoxuandata(item.id, $event)">{{ option }}</el-checkbox>
-      </el-checkbox-group>
-    
+      </el-checkbox-group>   
   </div>
 
 </div>
 
-  <!-- <el-radio v-model="radio" label="1" @click="ss">备选项</el-radio>
-  <el-radio v-model="radio" label="2" @click="ss">备选项</el-radio>
-<button @click="ss"></button>
-  <div v-for="(data4test, index) in data4tests" :key="index">
-      <div v-if="data4tests[index].type === 1">{{ data4tests[index].questiond }}</div>
-      <p v-else-if="data4tests[index].type === 2">{{ data4tests[index].questionf }}</p>
-   
-    </div> -->
+
 
   
 </div>
 </template>
 <script>
  import axios from 'axios'
-// import data from '@/assets/json/data.json'
+
 export default {
   data() {
     return {
@@ -78,44 +63,29 @@ export default {
     chosed:[],
      },
 
-     jsonData1:{
-      id:"",
-     title:"",
-     description:"",
-     questionList:[{id:0,questionType:0,title:"单选",optionsof:["单选选项","单选选项2"]},{id:1,questionType:2,title:"太难控",description:"额",correctAnswer:""},{id:2,questionType:1,title:"多选",optionsof:["多选"]}]},
-
+     
      jsonData: {},
-
  
     };
   },
-  // mounted() {
-  //   this.loadJsonFile();
-  // },
+  
   mounted() {
-    const jsonString = '{"id":"","title":"","description":"","questionList":[{"id":0,"questionType":0,"title":"单选","optionsof":["单选","单选2"]},{"id":1,"questionType":2,"title":"11","description":"11","correctAnswer":""},{"id":2,"questionType":1,"title":"多选","optionsof":["多选","多选2","多选3"]}]}'
+    const jsonString = '{"id":"","title":"","description":"","questionList":[{"id":0,"questionType":0,"title":"单选","optionsof":["单选1","单选2"]},{"id":1,"questionType":2,"title":"填空","description":"填空","correctAnswer":""},{"id":2,"questionType":1,"title":"多选","optionsof":["多选1","多选2","多选3"]}]}'
 
 
-    this.jsonData = JSON.parse(jsonString);
-    console.log(this.jsonData.questionList[0].id);
+this.jsonData = JSON.parse(jsonString);
   },
   methods: {
-    test(){ 
-      console.log(JSON.stringify(this.sendData));
-      // console.log(JSON.stringify(this.questiondata));
-// console.log(JSON.stringify(this.singledata));
-// console.log(JSON.stringify(this.duoxuandata));
-// console.log(JSON.stringify(this.checkList));
-// console.log(JSON.stringify(this.duoxuandata.chosed));
-    },
    
+   
+
      submitData(){
   this.sendData.writedata = this.questiondata
   console.log(JSON.stringify(this.sendData));
   axios.post('http://localhost:9090/result', this.sendData)
         .then(response => {
           console.log(response.data)
-          // window.location.href = 'http://localhost:8081/login'
+         
         })
         .catch(error => {
           console.log(error)
@@ -126,9 +96,7 @@ export default {
       this.singledata.id = questionId
      this.questiondata[questionId]=this.singledata
      
-    // console.log(event.target.value); 
-    // 访问输入框的值
-    // 其他处理逻辑...
+  
   },
 
   saveduoxuandata(questionId, event) {
@@ -142,14 +110,13 @@ export default {
       this.fillindata.id = questionId
      this.questiondata[questionId]=this.fillindata
      
-    // console.log(event.target.value); // 访问输入框的值
-    // 其他处理逻辑...
+  
   },
  
-  postData() {
+  submitLink() {
     
 
-      this.$http.post("localhost:9090/create", this.inputLink)
+      this.$http.post("localhost:9090/link", this.inputLink)
         .then(response => {
           if (response.data === 0) {
             alert('链接无效');
