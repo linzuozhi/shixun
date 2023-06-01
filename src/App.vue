@@ -94,7 +94,7 @@ background-color: aquamarine;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
   /* background-image: url("C:\Users\linzuozhi\Pictures\Feedback\{BE62AAEF-09EA-4E2D-9376-03B3E1DE4F57}\Capture001.png"); */
   /* display: grid;
   place-items: center;

@@ -5,6 +5,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import router  from './router/index.js'
 import axios from 'axios'
 import './assets/css/global.css'
+import echarts from "echarts";
+
+Vue.prototype.$echarts = echarts;
+
 Vue.config.productionTip = false
 Vue.use(ElementUI);
 new Vue({
