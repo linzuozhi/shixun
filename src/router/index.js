@@ -13,20 +13,34 @@ import test from "../components/pagecomponents/test.vue"
 Vue.use(VueRouter)
 const router = new VueRouter({
 routes:[{path:'/',component:signin}, 
-{path:'/signin',component:signin}, 
-{path:'/userdata',component:userdata}, 
+{path:'/signin',component:signin, name: "signin"}, 
+{path:'/userdata',component:userdata,meta: { requiresAuth: true }}, 
 {path:'/test',component:test}, 
 {path:'/signup',component:signup}, 
-{path:'/home',component:home}, 
-{path:'/login',component:login}, 
-{path:'/create',component:create},
-{path:'/share',component:share}, 
-
-{path:'/result',component:result},
+{path:'/home',component:home,meta: { requiresAuth: true }}, 
+{path:'/login',component:login,meta: { requiresAuth: true }}, 
+{path:'/create',component:create,meta: { requiresAuth: true }},
+{path:'/share',component:share,meta: { requiresAuth: true }}, 
+{path:'/result',component:result,meta: { requiresAuth: true }},
 
 ]
 
 
 
-})
+});
+
+// router.beforeEach((to, from, next) => {
+//     const isAuthenticated = localStorage.getItem("username");
+//     if (to.matched.some(record => record.meta.requiresAuth)) {
+//       if (isAuthenticated) {
+//         next();
+//       } else {
+//         alert("请先登录")
+//     //    this.$message.error("请先登录");
+//         next({ name: "signin" });
+//       }
+//     } else {
+//       next();
+//     }
+//   });
 export default router

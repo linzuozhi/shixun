@@ -1,6 +1,6 @@
 <template>
     <div style="height: 50px;   line-height: 50px;border-bottom: 1px solid black;display: flex;">
-        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: aquamarine;cursor: pointer;" @click=" returntohome ">TEST</div>
+        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: aquamarine;cursor: pointer;" @click=" returntohome ">QSTAR</div>
         <div style="flex: 1;"> </div>
         <div style="width: 100px;"> 
 
@@ -47,7 +47,7 @@ methods:{
   }
   },
   changeToUserData(){
-    const currentRoute = this.$route.path;
+    const currentRoute = this.$route.path; 
   if (currentRoute !== "/userdata") {
     this.$router.push("userdata");
   }
