@@ -103,7 +103,7 @@ export default {
           console.log(link);
           localStorage.setItem("link", link);
           this.$alert("问卷链接为：" + link, "分享问卷", {
-        confirmButtonText: "复制链接",
+        confirmButtonText: "复制链接并跳转到填写界面",
         callback: () => {
           this.$copyText(link)
 

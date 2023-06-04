@@ -102,10 +102,7 @@ for (const item of this.jsonData.questionList) {
   }
   },
   methods: {
-   test(){
-    this.sendData.writedata = this.questiondata
-    console.log(JSON.stringify(this.sendData));
-   },
+  
    
 
      submitData(){
@@ -126,7 +123,7 @@ for (const item of this.jsonData.questionList) {
   submitLink() {
     
 
-      this.$http.post("localhost:9090/link", this.inputLink)
+      axios.post("localhost:9090/link", this.inputLink)
         .then(response => {
           if (response.data === 0) {
             alert('链接无效');
