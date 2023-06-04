@@ -1,6 +1,6 @@
 <template>
     <div style="height: 50px;   line-height: 50px;border-bottom: 1px solid black;display: flex;">
-        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: aquamarine;" >TEST</div>
+        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: aquamarine;cursor: pointer;" @click=" returntohome ">TEST</div>
         <div style="flex: 1;"> </div>
         <div style="width: 100px;"> 
 
@@ -40,13 +40,27 @@ username:"",
 },
 
 methods:{
+  returntohome(){
+    const currentRoute = this.$route.path;
+  if (currentRoute !== "/home") {
+    this.$router.push("home");
+  }
+  },
   changeToUserData(){
-    this.$router.push("userdata")
+    const currentRoute = this.$route.path;
+  if (currentRoute !== "/userdata") {
+    this.$router.push("userdata");
+  }
+   
   },
   logout(){
     const username = localStorage.getItem("username");
   if (!username) {
     this.$message.error("当前未登录");
+    const currentRoute = this.$route.path;
+  if (currentRoute !== "/signin") {
+    this.$router.push("signin");
+  }
   } else {
     localStorage.setItem("username", "");
     this.$router.push("signin")
