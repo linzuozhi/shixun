@@ -44,9 +44,17 @@ methods:{
     this.$router.push("userdata")
   },
   logout(){
+    const username = localStorage.getItem("username");
+  if (!username) {
+    this.$message.error("当前未登录");
+  } else {
     localStorage.setItem("username", "");
- this.$router.push("signin")
- location.reload();
+    this.$router.push("signin")
+    location.reload();
+  }
+//     localStorage.setItem("username", "");
+//  this.$router.push("signin")
+//  location.reload();
   },
   test(){
 
