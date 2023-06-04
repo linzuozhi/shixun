@@ -46,6 +46,7 @@ methods:{
   logout(){
     localStorage.setItem("username", "");
  this.$router.push("signin")
+ location.reload();
   },
   test(){
 

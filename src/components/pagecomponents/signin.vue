@@ -12,7 +12,7 @@
             <el-input type="password" v-model="form.password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="login">登录</el-button>
+            <el-button type="primary" @click="test">登录</el-button>
             <el-button @click="resetForm">重置</el-button>
             <el-button @click="changetosignup">注册</el-button>
           </el-form-item>
@@ -32,7 +32,7 @@ export default {
 
   data() {
     return {
-     
+     test1:"Yonghuming",
       form: {
         username: "",
         password: "",
@@ -52,7 +52,14 @@ export default {
     changepage() {
       this.$router.push("/home");
     },
-   
+   test(){
+    localStorage.setItem("username", this.test1);
+                const username = localStorage.getItem("username");
+                console.log(username);
+               
+                this.$router.push("home")
+                 location.reload();
+   },
     login() {
       this.$refs.form.validate((valid) => {
         if (valid) {
