@@ -7,7 +7,7 @@
   <div v-for="(item, index) in jsonData.questionList" :key="index" >
     
   <div v-if="item.questionType === 0" class="type1">
-    <p  class="title">题目：{{ item.title }}    </p>
+    <p  class="title">单选题：{{ item.title }}    </p>
   <el-radio-group  v-model="singledata.chosed" class="radiogroup" >
       <el-radio v-for="(option, i) in item.optionsof" :key="i" :label="i"  class="radio-item" @change="savesingledata(item.id, $event)"> {{ option }}</el-radio>
     </el-radio-group>

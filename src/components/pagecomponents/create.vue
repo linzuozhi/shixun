@@ -48,10 +48,7 @@ export default {
     };
   },
   methods: {
-    test() {
-      alert("localhost:9090/login?id=1685325215406");
-      this.$router.push("/login");
-    },
+   
     trya(data) {
       const isDuplicate = this.form.some(
         (item) => JSON.stringify(item) === JSON.stringify(data)

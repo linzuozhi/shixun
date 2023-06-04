@@ -81,7 +81,7 @@ export default {
               console.log(error);
             });
 
-          alert("成功注册");
+          
           this.$router.push("/signin");
           console.log("注册成功");
         } else {

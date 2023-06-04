@@ -4,17 +4,25 @@
         <div style="flex: 1;"> </div>
         <div style="width: 100px;"> 
 
-
-          <el-dropdown id="xiala" >
+          <el-dropdown>
+    <span class="el-dropdown-link">
+      {{ username }}<i class="el-icon-arrow-down el-icon--right"></i>
+    </span>
+    <el-dropdown-menu slot="dropdown" >
+      <el-dropdown-item @click.native="changeToUserData">个人资料</el-dropdown-item>
+      <el-dropdown-item @click.native="logout">登出</el-dropdown-item>
+    </el-dropdown-menu>
+  </el-dropdown>
+          <!-- <el-dropdown id="xiala" >
     <span class="el-dropdown-link">{{ username }}</span>
    
       <el-dropdown-menu style="cursor: pointer;"  slot="dropdown">
         <el-dropdown-item  @click="test">personal data</el-dropdown-item>
         <el-dropdown-item>quit</el-dropdown-item>
-        <!-- <el-dropdown-item>选项3</el-dropdown-item> -->
+       
       </el-dropdown-menu>
     
-  </el-dropdown>
+  </el-dropdown> -->
 </div>
 
     </div>
@@ -32,6 +40,13 @@ username:"",
 },
 
 methods:{
+  changeToUserData(){
+    this.$router.push("userdata")
+  },
+  logout(){
+    localStorage.setItem("username", "");
+ this.$router.push("signin")
+  },
   test(){
 
     alert("test")

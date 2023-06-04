@@ -8,7 +8,7 @@
       </div>
       <h3 v-if="question.type === 2">{{ question.title }}</h3>
       <div v-if="question.type === 2">
-        <ul>
+        <ul class="re-list">
           <li v-for="(answer, index) in question.filldata" :key="index">{{ answer }}</li>
         </ul>
       </div>
@@ -77,6 +77,11 @@ export default {
                 textofoption: '选项4',
                 num: 2,
               },
+              {
+               id:4,
+                textofoption:'选项5',
+               num:1
+              }
             ],
           },
           {
@@ -115,15 +120,16 @@ export default {
       
     },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
             series: [
-              {
+              {name:"详细数据",
                 type: 'pie',
                 
                 data: chartData,
+                // roseType:'area',
                 label: {
-                show: true,
-                position: 'inside',
-                formatter: '{b} ({d}%)',
-              },
+                  show: true,
+                                 position: 'inside',
+                                                 formatter: '{b} ({d}%)',             
+                                                 },
               },
             ],
           };
@@ -136,9 +142,19 @@ export default {
 </script>
 
 <style>
-ul {
-  list-style-type: none;
+.re-list {
+  list-style-type: none; 
+  margin: 0;
+  padding: 0; 
 }
+
+.re-list li {
+  font-size: 16px; 
+  color: #333; 
+  line-height: 1.5; /* 修改行高，增加间距 */
+  margin-bottom: 10px; /* 增加每项之间的间距 */
+}
+
 .chart-container {
 display: flex;
 justify-content: center;

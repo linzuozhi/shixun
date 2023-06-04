@@ -9,6 +9,7 @@ import signin from '../components/pagecomponents/signin.vue'
 import signup from '../components/pagecomponents/signup.vue'
 import userdata from "../components/pagecomponents/userdata.vue"
 import test from "../components/pagecomponents/test.vue"
+
 Vue.use(VueRouter)
 const router = new VueRouter({
 routes:[{path:'/',component:signin}, 

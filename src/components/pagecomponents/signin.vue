@@ -12,7 +12,7 @@
             <el-input type="password" v-model="form.password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="changepage">登录</el-button>
+            <el-button type="primary" @click="login">登录</el-button>
             <el-button @click="resetForm">重置</el-button>
             <el-button @click="changetosignup">注册</el-button>
           </el-form-item>
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-
+import axios  from 'axios';
 export default {
   components: {
   
@@ -54,7 +54,7 @@ export default {
     },
    
     login() {
-      this.$refsform.validate((valid) => {
+      this.$refs.form.validate((valid) => {
         if (valid) {
          
 
