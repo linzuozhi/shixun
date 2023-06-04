@@ -36,7 +36,7 @@ routes:[{path:'/',component:signin},
 //         next();
 //       } else {
 //         alert("请先登录")
-//     //    this.$message.error("请先登录");
+    
 //         next({ name: "signin" });
 //       }
 //     } else {

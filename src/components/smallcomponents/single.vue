@@ -63,7 +63,10 @@ export default {
     //  console.log(this.duoxuanpac.xuanxiang);
     //  console.log(this.duoxuanpac);
     },
-    delCheckbox(){this.options.pop()},
+    delCheckbox(){
+      this.options.pop()
+      this.duoxuanpac.optionsof.pop()
+    },
     submitDuoxuanData() {
       console.log(this.duoxuanpac);
       axios.post('/login', this.duoxuanpac)

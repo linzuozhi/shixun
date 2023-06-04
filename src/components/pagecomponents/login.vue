@@ -3,25 +3,25 @@
   <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
     <el-button type="primary" @click="submitLink">提交</el-button>
     <el-button type="primary" @click="submitData">完成填写</el-button>
-
+<span >{{ this.title }}</span>
   <div v-for="(item, index) in jsonData.questionList" :key="index" >
     
   <div v-if="item.questionType === 0" class="type1">
     <p  class="title">单选题：{{ item.title }}    </p>
-  <el-radio-group  v-model="singledata.chosed" class="radiogroup" >
-      <el-radio v-for="(option, i) in item.optionsof" :key="i" :label="i"  class="radio-item" @change="savesingledata(item.id, $event)"> {{ option }}</el-radio>
+  <el-radio-group  v-model="questiondata[index].chosed" class="radiogroup" >
+      <el-radio v-for="(option, i) in item.optionsof" :key="i" :label="i"  class="radio-item" > {{ option }}</el-radio>
     </el-radio-group>
   </div>
 
   <div v-else-if="item.questionType ===2" class="type2">
    <p class="title">填空题：{{ item.title }}    </p>
-   <el-input  :placeholder="item.description" style="background-color: #FFFAFA;" v-model="fillindata.fillinanswer"  @change="savefillindata(item.id, $event)"></el-input>    
+   <el-input  :placeholder="item.description" style="background-color: #FFFAFA;" v-model="questiondata[index].fillinanswer"  ></el-input>    
   </div>
 
   <div v-if="item.questionType === 1" class="type3">
     <p  class="title" > 多选题：{{ item.title }}     </p>
-    <el-checkbox-group v-model="duoxuandata.chosed" class="checkboxgroup">
-        <el-checkbox v-for="(option, i) in item.optionsof" :key="i" :label="i"  @change="saveduoxuandata(item.id, $event)">{{ option }}</el-checkbox>
+    <el-checkbox-group v-model="questiondata[index].chosed" class="checkboxgroup">
+        <el-checkbox v-for="(option, i) in item.optionsof" :key="i" :label="i" >{{ option }}</el-checkbox>
       </el-checkbox-group>   
   </div>
 
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       inputLink:"",
+      title:"",
       sendData:{
       id:"",
       username:"",
@@ -46,6 +47,8 @@ export default {
 
       },
       questiondata:[],
+
+data4test:[],
 
      fillindata:{
       id:"",
@@ -70,13 +73,39 @@ export default {
   },
   
   mounted() {
-    const jsonString = '{"id":"","title":"","description":"","questionList":[{"id":0,"questionType":0,"title":"单选","optionsof":["单选1","单选2"]},{"id":1,"questionType":2,"title":"填空","description":"填空","correctAnswer":""},{"id":2,"questionType":1,"title":"多选","optionsof":["多选1","多选2","多选3"]}]}'
+    const jsonString = '{"id":"123","title":"问卷标题","description":"","questionList":[{"id":0,"questionType":0,"title":"单选","optionsof":["单选1","单选2"]},{"id":1,"questionType":2,"title":"填空","description":"填空","correctAnswer":""},{"id":2,"questionType":1,"title":"多选","optionsof":["多选1","多选2","多选3"]},{"id":3,"questionType":0,"title":"单选2","optionsof":["单选12","单选22"]},{"id":4,"questionType":2,"title":"填空2","description":"填空2","correctAnswer":""},{"id":5,"questionType":1,"title":"多选2","optionsof":["多选12","多选22","多选32"]}]}'
 
 
 this.jsonData = JSON.parse(jsonString);
+this.sendData.id=this.jsonData.id;
+this.title =this.jsonData.title;
+for (const item of this.jsonData.questionList) {
+    if (item.questionType === 0) {
+      // 添加单选题对象
+      this.questiondata.push({
+        id: item.id,
+        chosed: []
+      });
+    } else if (item.questionType === 1) {
+      // 添加多选题对象
+      this.questiondata.push({
+        id: item.id,
+        chosed: []
+      });
+    } else if (item.questionType === 2) {
+      // 添加填空题对象
+      this.questiondata.push({
+        id: item.id,
+        fillinanswer: ''
+      });
+    }
+  }
   },
   methods: {
-   
+   test(){
+    this.sendData.writedata = this.questiondata
+    console.log(JSON.stringify(this.sendData));
+   },
    
 
      submitData(){
@@ -92,12 +121,56 @@ this.jsonData = JSON.parse(jsonString);
         })
      },
 
+    
+ 
+  submitLink() {
+    
+
+      this.$http.post("localhost:9090/link", this.inputLink)
+        .then(response => {
+          if (response.data === 0) {
+            alert('链接无效');
+            this.inputValue = '';
+          } else {
+            const linkString = response.data
+this.jsonData = JSON.parse(linkString);
+for (const item of this.jsonData.questionList) {
+    if (item.questionType === 0) {
+      // 添加单选题对象
+      this.questiondata.push({
+        id: item.id,
+        chosed: []
+      });
+    } else if (item.questionType === 1) {
+      // 添加多选题对象
+      this.questiondata.push({
+        id: item.id,
+        chosed: []
+      });
+    } else if (item.questionType === 2) {
+      // 添加填空题对象
+      this.questiondata.push({
+        id: item.id,
+        fillinanswer: ''
+      });
+    }
+  }
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
     savesingledata(questionId, event) {
+      
       this.singledata.id = questionId
      this.questiondata[questionId]=this.singledata
+    
      
   
   },
+
+ 
 
   saveduoxuandata(questionId, event) {
       this.duoxuandata.id = questionId
@@ -112,26 +185,6 @@ this.jsonData = JSON.parse(jsonString);
      
   
   },
- 
-  submitLink() {
-    
-
-      this.$http.post("localhost:9090/link", this.inputLink)
-        .then(response => {
-          if (response.data === 0) {
-            alert('链接无效');
-            this.inputValue = '';
-          } else {
-            const linkString = response.data
-this.jsonData = JSON.parse(linkString);
-           
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    
     
   },
 }

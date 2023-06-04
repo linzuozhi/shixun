@@ -53,12 +53,18 @@ export default {
       this.$router.push("/home");
     },
    test(){
-    localStorage.setItem("username", this.test1);
+    console.log("登录成功");
+                localStorage.setItem("username", this.form.username);
                 const username = localStorage.getItem("username");
                 console.log(username);
+                this.$router.push("/home");
+                location.reload();
+    // localStorage.setItem("username", this.test1);
+    //             const username = localStorage.getItem("username");
+    //             console.log(username);
                
-                this.$router.push("home")
-                 location.reload();
+    //             this.$router.push("home")
+    //              location.reload();
    },
     login() {
       this.$refs.form.validate((valid) => {

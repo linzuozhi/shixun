@@ -6,7 +6,9 @@ import router  from './router/index.js'
 import axios from 'axios'
 import './assets/css/global.css'
 import echarts from "echarts";
+import VueClipboard from 'vue-clipboard2'
 
+Vue.use(VueClipboard)
 Vue.prototype.$echarts = echarts;
 
 Vue.config.productionTip = false

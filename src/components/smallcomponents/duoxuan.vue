@@ -72,6 +72,7 @@ export default {
     },
     delCheckbox() {
       this.options.pop();
+      this.duoxuanpac.optionsof.pop()
     },
    
   },

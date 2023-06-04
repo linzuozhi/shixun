@@ -48,14 +48,16 @@ export default {
     };
   },
   methods: {
-   
+   test(){
+    console.log(JSON.stringify(this.form));
+   },
     trya(data) {
       const isDuplicate = this.form.some(
         (item) => JSON.stringify(item) === JSON.stringify(data)
       );
       if (!isDuplicate) {
         this.form.push(data);
-        const index = this.form.length - 1; // 获取刚加入的数据对象的索引
+        const index = this.form.length - 1; 
         data.id = index;
       } else {
         const index = this.form.findIndex(
@@ -69,16 +71,16 @@ export default {
 
     addDiv1() {
       this.divs.push("single");
-      this.record += "1";
+   
     },
     addDiv2() {
       this.fillinpac = { type: "2", questionf: this.divs.length, hint: "" };
       this.divs.push("fillin");
-      this.record += "2";
+      
     },
     addDiv3() {
       this.divs.push("duoxuan");
-      this.record += "3";
+     
     },
 
     shanchu() {
@@ -100,11 +102,21 @@ export default {
           let link = "localhost:9090/login?id=" + qsid+ "&username=" + username;
           console.log(link);
           localStorage.setItem("link", link);
+          this.$alert("问卷链接为：" + link, "分享问卷", {
+        confirmButtonText: "复制链接",
+        callback: () => {
+          this.$copyText(link)
+
+          this.$router.push("login");
+          
+          // 在这里处理复制链接的逻辑
+        }
+      });
         })
         .catch((error) => {
           console.log(error);
         });
-      this.$router.push("/login");
+      
     },
   },
 };
