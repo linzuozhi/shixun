@@ -87,7 +87,7 @@ export default {
 
   },
   methods: {
-    
+
     initSendData() {
       this.sendData.id = this.jsonData.id;
       this.sendData.title = this.jsonData.title;
