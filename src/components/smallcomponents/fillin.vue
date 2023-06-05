@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <el-input placeholder="请输入问题" v-model="fillinpac.title"></el-input>
+    <el-input placeholder="请输入问题" v-model="fillinpac.title" @change="both"></el-input>
     <el-input
       placeholder="请输入答题提示（可空）"
       v-model="fillinpac.description"
