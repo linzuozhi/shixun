@@ -1,31 +1,32 @@
 <template>
   <div id="create">
     <div>
-      <el-button @click="addDiv1" type="primary">单选题</el-button>
-      <el-button @click="addDiv2" type="primary">填空题</el-button>
-      <el-button @click="addDiv3" type="primary">多选题</el-button>
-      <el-button @click="shanchu" type="primary">删除</el-button>
-      <el-button @click="submitData" type="primary">完成</el-button>
+      <el-button type="primary" @click="addDiv1">单选题</el-button>
+      <el-button type="primary" @click="addDiv2">填空题</el-button>
+      <el-button type="primary" @click="addDiv3">多选题</el-button>
+      <el-button type="primary" @click="shanchu">删除</el-button>
+      <el-button type="primary" @click="submitData">完成</el-button>
     </div>
 
     <el-input
-      v-model="questionnaire.title"
-      id="titleinput"
-      placeholder="请输入问卷标题"
+        id="titleinput"
+        v-model="questionnaire.title"
+        placeholder="请输入问卷标题"
     ></el-input>
     <div v-for="(div, index) in divs" :key="index" class="putcen">
       <component :is="div" @a="trya" @b="trya" @c="trya"></component>
     </div>
   </div>
 </template>
-  
-  <script>
+
+<script>
 import axios from "axios";
 import selectdiv from "../smallcomponents/selectdiv.vue";
 import xiala from "../smallcomponents/xiala.vue";
 import fillin from "../smallcomponents/fillin.vue";
 import single from "../smallcomponents/single.vue";
 import duoxuan from "../smallcomponents/duoxuan.vue";
+
 export default {
   components: {
     selectdiv,
@@ -48,20 +49,20 @@ export default {
     };
   },
   methods: {
-   test(){
-    console.log(JSON.stringify(this.form));
-   },
+    test() {
+      console.log(JSON.stringify(this.form));
+    },
     trya(data) {
       const isDuplicate = this.form.some(
-        (item) => JSON.stringify(item) === JSON.stringify(data)
+          (item) => JSON.stringify(item) === JSON.stringify(data)
       );
       if (!isDuplicate) {
         this.form.push(data);
-        const index = this.form.length - 1; 
+        const index = this.form.length - 1;
         data.id = index;
       } else {
         const index = this.form.findIndex(
-          (item) => JSON.stringify(item) === JSON.stringify(data)
+            (item) => JSON.stringify(item) === JSON.stringify(data)
         );
         if (index !== -1) {
           this.form.splice(index, 1, data);
@@ -71,16 +72,16 @@ export default {
 
     addDiv1() {
       this.divs.push("single");
-   
+
     },
     addDiv2() {
-      this.fillinpac = { type: "2", questionf: this.divs.length, hint: "" };
+      this.fillinpac = {type: "2", questionf: this.divs.length, hint: ""};
       this.divs.push("fillin");
-      
+
     },
     addDiv3() {
       this.divs.push("duoxuan");
-     
+
     },
 
     shanchu() {
@@ -91,41 +92,41 @@ export default {
     submitData() {
       this.questionnaire.questionList = this.form;
       axios
-        .post("http://localhost:9090/login", this.questionnaire)
-        .then((response) => {
-          let id = response.data;
-          // console.log(response.data)
-          // console.log(id)
-          localStorage.setItem("id", id);
-          const qsid = localStorage.getItem("id");
-          const username = localStorage.getItem("username");
-          let link = "localhost:9090/login?id=" + qsid+ "&username=" + username;
-          console.log(link);
-          localStorage.setItem("link", link);
-          this.$alert("问卷链接为：" + link, "分享问卷", {
-        confirmButtonText: "复制链接并跳转到填写界面",
-        callback: () => {
-          this.$copyText(link)
+          .post("http://localhost:9090/create", this.questionnaire)
+          .then((response) => {
+            let id = response.data;
 
-          this.$router.push("login");
-          
-          // 在这里处理复制链接的逻辑
-        }
-      });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      
+            localStorage.setItem("id", id);
+            const qsid = localStorage.getItem("id");
+            const username = localStorage.getItem("username");
+            let link = "localhost:9090/login?id=" + qsid + "&username=" + username;
+            console.log(link);
+            localStorage.setItem("link", link);
+            this.$alert("问卷链接为：" + link, "分享问卷", {
+              confirmButtonText: "复制链接",
+              callback: () => {
+                this.$copyText(link)
+
+                this.$router.push("login");
+
+                // 在这里处理复制链接的逻辑
+              }
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
     },
   },
 };
 </script>
-  
-  <style>
+
+<style>
 #titleinput {
   width: 600px;
 }
+
 .putcen {
   position: relative;
   left: 27%;

@@ -3,7 +3,7 @@
     <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
     <div v-for="question in dataofwritten.questiondata" :key="question.id">
       <h3 v-if="question.type === 1">{{ question.title }}</h3>
-      <div v-if="question.type === 1"  class="chart-container">
+      <div v-if="question.type === 1" class="chart-container">
         <div :id="'chart' + question.id" style="width: 400px; height: 400px;"></div>
       </div>
       <h3 v-if="question.type === 2">{{ question.title }}</h3>
@@ -27,7 +27,7 @@ export default {
         questiondata: [
           {
             type: 1,
-            title:"单选题1",
+            title: "单选题1",
             id: 0,
             seleted: [
               {
@@ -54,7 +54,7 @@ export default {
           },
           {
             type: 1,
-            title:"单选题2",
+            title: "单选题2",
             id: 1,
             seleted: [
               {
@@ -78,16 +78,16 @@ export default {
                 num: 2,
               },
               {
-               id:4,
-                textofoption:'选项5',
-               num:1
+                id: 4,
+                textofoption: '选项5',
+                num: 1
               }
             ],
           },
           {
             type: 2,
             id: 2,
-            title:"填空题",
+            title: "填空题",
             filldata: ['填空回答1', '填空回答2', '填空回答3'],
           },
         ],
@@ -109,27 +109,28 @@ export default {
 
           const chart = echarts.init(document.getElementById(chartId));
           const options = {
-              
-              tooltip: {
-     trigger: 'item',
-      formatter: '{a} <br/>{b}: {c} ({d}%)'
-    },
-    legend: {
-      orient: 'vertical',
-      left: 10,
-      
-    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+            tooltip: {
+              trigger: 'item',
+              formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+              orient: 'vertical',
+              left: 10,
+
+            },
             series: [
-              {name:"详细数据",
+              {
+                name: "详细数据",
                 type: 'pie',
-                
+
                 data: chartData,
                 // roseType:'area',
                 label: {
                   show: true,
-                                 position: 'inside',
-                                                 formatter: '{b} ({d}%)',             
-                                                 },
+                  position: 'inside',
+                  formatter: '{b} ({d}%)',
+                },
               },
             ],
           };
@@ -143,20 +144,20 @@ export default {
 
 <style>
 .re-list {
-  list-style-type: none; 
+  list-style-type: none;
   margin: 0;
-  padding: 0; 
+  padding: 0;
 }
 
 .re-list li {
-  font-size: 16px; 
-  color: #333; 
+  font-size: 16px;
+  color: #333;
   line-height: 1.5; /* 修改行高，增加间距 */
   margin-bottom: 10px; /* 增加每项之间的间距 */
 }
 
 .chart-container {
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 </style>
