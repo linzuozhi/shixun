@@ -1,6 +1,6 @@
 <template>
     <div style="height: 50px;   line-height: 50px;border-bottom: 1px solid black;display: flex;">
-        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: aquamarine;cursor: pointer;" @click=" returntohome ">QSTAR</div>
+        <div style="width: 200px;padding-left: 30px;font-weight: bold;color: black;cursor: pointer;font-family:'Courier New', Courier, monospace;font-size:xx-large;" @click=" returntohome ">QSTAR</div>
         <div style="flex: 1;"> </div>
         <div style="width: 100px;"> 
 

@@ -14,8 +14,11 @@
 <style>
 #imageofhome{
 
-
-  
+/* width: 600px;
+height: 400px;
+  background-image: url("@/assets/image/valentin-bolder-BZOtLUdDcoU-unsplash.jpg"); */
+  background-size: cover;
+  margin: 0 auto;
 }
 .class {
   height: 1280px;
