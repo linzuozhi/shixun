@@ -6,6 +6,8 @@
       <el-button type="primary" @click="addDiv3">多选题</el-button>
       <el-button type="primary" @click="shanchu">删除</el-button>
       <el-button type="primary" @click="submitData">完成</el-button>
+      <el-button type="primary" @click="preview">预览</el-button>
+
     </div>
 
     <el-input
@@ -16,6 +18,63 @@
     <div v-for="(div, index) in divs" :key="index" class="putcen">
       <component :is="div" @a="trya" @b="trya" @c="trya"></component>
     </div>
+
+
+<!-- 以下为预览部分 -->
+
+    <el-dialog :visible.sync="previewDialogVisible" title="预览问卷" class="eldialog">
+      <div v-for="(item, index) in this.form" :key="index">
+        <div v-if="item.questionType === 0" class="type1">
+          <p class="title">单选题：{{ item.title }} </p>
+          <el-radio-group
+           
+            class="radiogroup"
+          >
+            <el-radio
+              v-for="(option, i) in item.optionsof"
+              :key="i"
+              :label="i"
+              class="radio-item"
+              >{{ option }}</el-radio
+            >
+          </el-radio-group>
+        </div>
+
+        <div v-else-if="item.questionType ===2" class="type2">
+          <p class="title">填空题：{{ item.title }} </p>
+          <el-input
+            
+            :placeholder="item.description"
+            style="background-color: #FFFAFA;"
+          ></el-input>
+        </div>
+
+        <div v-if="item.questionType === 1" class="type3">
+          <p class="title"> 多选题：{{ item.title }} </p>
+          <el-checkbox-group
+          
+            class="checkboxgroup"
+          >
+            <el-checkbox
+              v-for="(option, i) in item.optionsof"
+              :key="i"
+              :label="i"
+              >{{ option }}</el-checkbox
+            >
+          </el-checkbox-group>
+        </div>
+      </div>
+      <div slot="footer">
+        <el-button type="primary" @click="previewDialogVisible = false"
+          >关闭</el-button
+        >
+      </div>
+    </el-dialog>
+
+
+
+
+
   </div>
 </template>
 
@@ -38,20 +97,25 @@ export default {
   data() {
     return {
       divs: [],
-
+      previewDialogVisible: false,
+      
       questionnaire: {
         id: "",
         title: "",
         description: "",
         questionList: [],
       },
+      jsonData: {
+      
+      },
       form: [],
     };
   },
   methods: {
-    test() {
-      console.log(JSON.stringify(this.form));
-    },
+   preview() {
+      this.questionnaire.questionList = this.form;
+     this.previewDialogVisible = true;
+},
     trya(data) {
       const isDuplicate = this.form.some(
           (item) => JSON.stringify(item) === JSON.stringify(data)
@@ -75,7 +139,7 @@ export default {
 
     },
     addDiv2() {
-      this.fillinpac = {type: "2", questionf: this.divs.length, hint: ""};
+     
       this.divs.push("fillin");
 
     },
@@ -123,6 +187,14 @@ export default {
 </script>
 
 <style>
+.eldialog{
+display: flex;
+height: auto;
+width: 80%;
+text-align: center;
+align-items: center;
+}
+
 #titleinput {
   width: 600px;
 }

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
+    <el-button icon="el-icon-search" circle @click="submitLink"></el-button>
     <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
     <div v-for="question in dataofwritten.questiondata" :key="question.id">
       <h3 v-if="question.type === 1">{{ question.title }}</h3>
@@ -22,6 +24,8 @@ import * as echarts from 'echarts';
 export default {
   data() {
     return {
+      jsonData:{},
+      inputLink:"",
       dataofwritten: {
         titleofquestionnaire: '问卷标题',
         questiondata: [
@@ -98,6 +102,22 @@ export default {
     this.renderCharts();
   },
   methods: {
+    submitLink() {
+      axios.post("http://localhost:9090/analyze", this.inputLink)
+          .then(response => {
+            if (response.data === 0) {
+              alert('链接无效');
+              this.inputValue = '';
+            } else {
+              this.jsonData = response.data;
+              this.renderCharts();
+              // 记得改renderCharts里的this.dataofwritten.questiondata为this.jsonData.questiondata
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+    },
     renderCharts() {
       for (const question of this.dataofwritten.questiondata) {
         if (question.type === 1) {

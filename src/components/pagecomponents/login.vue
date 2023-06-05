@@ -1,5 +1,6 @@
 <template>
   <div id="total">
+    
     <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
     <el-button type="primary" @click="submitLink">提交</el-button>
     <el-button type="primary" @click="submitData">完成填写</el-button>
@@ -86,6 +87,7 @@ export default {
 
   },
   methods: {
+    
     initSendData() {
       this.sendData.id = this.jsonData.id;
       this.sendData.title = this.jsonData.title;
