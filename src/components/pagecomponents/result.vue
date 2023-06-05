@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
+    <el-input v-model="inputLink" placeholder="请输入链接以查看结果"></el-input>
     <el-button icon="el-icon-search" circle @click="submitLink"></el-button>
     <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
     <div v-for="question in dataofwritten.questiondata" :key="question.id">

@@ -96,7 +96,7 @@ export default {
 
     submitData() {
       this.initSendData();
-      this.sendData.writedata = this.questiondata
+      this.sendData.questionList = this.questiondata
       console.log(JSON.stringify(this.sendData));
       axios.post('http://localhost:9090/result', this.sendData)
           .then(response => {

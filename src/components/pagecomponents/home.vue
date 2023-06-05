@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <div id="imageofhome"></div>
     <router-link to="/create" class="my-link">创建问卷 </router-link>
     <router-link to="/login" class="my-link">填写问卷 </router-link>
     <router-link to="/result" class="my-link">填写情况</router-link>
@@ -11,6 +12,11 @@
 
 
 <style>
+#imageofhome{
+
+
+  
+}
 .class {
   height: 1280px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -18,6 +24,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 </style>

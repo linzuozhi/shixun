@@ -82,18 +82,18 @@ export default {
 </script>
 
 <style>
-.btn{
-background-color: aquamarine;
 
-
-}
 #app {
-  height: 1280px;
+  /* height: 1280px; */
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 800px;
+  /* background-image: url("@/assets/logo.png"); */
+  background-size: cover;
+  /* display:grid; */
   /* margin-top: 60px; */
   /* background-image: url("C:\Users\linzuozhi\Pictures\Feedback\{BE62AAEF-09EA-4E2D-9376-03B3E1DE4F57}\Capture001.png"); */
   /* display: grid;
@@ -102,6 +102,28 @@ background-color: aquamarine;
 
 }
 .my-link {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 10px;
+  text-decoration: none;
+  color: #333;
+  border-radius: 50%;
+  min-width: 50px;
+  min-height: 50px;
+}
+
+.my-link:hover {
+  background-color: #ddd;
+  font-size: 18px;
+}
+
+/* .my-link {
   color: #333;
   text-decoration: none;
   padding: 10px;
@@ -116,5 +138,5 @@ background-color: aquamarine;
 .my-link:hover {
   background-color: #ddd;
   font-size: 18px;
-}
+} */
 </style>

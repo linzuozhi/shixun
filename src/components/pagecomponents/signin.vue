@@ -104,14 +104,24 @@ export default {
   height: auto;
 }
 
-#window {
+/* #window {
   margin-top: 100px;
   margin-left: 400px;
   width: 500px;
   height: 400px;
-  /* background-color: bisque; */
+ 
   position: relative;
   display: flex;
+} */
+
+#window {
+  margin: 0 auto;
+  width: 500px;
+  height: 400px;
+  /* background-color: bisque; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #smallwindow {
