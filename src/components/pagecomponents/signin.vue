@@ -1,6 +1,6 @@
 <template>
   <div id="total">
-
+<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace;">Welcome to QSTAR</div>
     <div id="window">
 
       <div id="smallwindow">
@@ -100,8 +100,19 @@ export default {
 </script>
 
 <style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 #total {
-  height: auto;
+  background-image: url("@/assets/image/pexels-anete-lusina-16621377.jpg"); 
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  min-height:800px;
+  margin-top: 0;
+  padding: 0;
 }
 
 /* #window {
@@ -118,14 +129,17 @@ export default {
   margin: 0 auto;
   width: 500px;
   height: 400px;
-  /* background-color: bisque; */
+  background-color: #F0FFFF;
   display: flex;
   justify-content: center;
   align-items: center;
+  border:1px solid rgb(208, 218, 220);
+        box-shadow: 0 0 25px #2094bb;
+        border-radius: 15px;
 }
 
 #smallwindow {
-  margin-top: 100px;
-  margin-left: 20px;
+  margin: auto;
+
 }
 </style>

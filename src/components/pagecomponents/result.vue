@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header></Header>
     <el-input v-model="inputLink" placeholder="请输入链接以查看结果"></el-input>
     <el-button icon="el-icon-search" circle @click="submitLink"></el-button>
     <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
@@ -21,13 +22,19 @@
 <script>
 import * as echarts from 'echarts';
 import axios from 'axios';
+import Header from "../smallcomponents/header.vue"
+
 export default {
+ components: {
+   Header
+  }, 
   data() {
     return {
       jsonData:{},
       inputLink:"",
       dataofwritten: {
-
+        titleofquestionnaire:"",
+        questiondata:[],
       },
     };
   },

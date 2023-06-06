@@ -1,5 +1,7 @@
 <template>
   <div id="total">
+<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace;">Welcome to QSTAR</div>
+
     <div id="window">
       <div id="smallwindow">
         <el-form ref="form" :model="form" :rules="rules" label-width="80px">

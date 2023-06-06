@@ -1,22 +1,27 @@
 <template>
+  <div> <Header></Header>
+  <div id="allofcreate">
+   
   <div id="create">
-    <div>
+    
+    <div id="btngroup">
       <el-button type="primary" @click="addDiv1">单选题</el-button>
       <el-button type="primary" @click="addDiv2">填空题</el-button>
       <el-button type="primary" @click="addDiv3">多选题</el-button>
       <el-button type="primary" @click="shanchu">删除</el-button>
-      <el-button type="primary" @click="submitData">完成</el-button>
-      <el-button type="primary" @click="preview">预览</el-button>
-
-    </div>
-
-    <el-input
+       <el-button type="primary" @click="preview">预览</el-button>
+       <el-button type="primary" @click="submitData">完成</el-button>
+     
+<el-input
         id="titleinput"
         v-model="questionnaire.title"
         placeholder="请输入问卷标题"
     ></el-input>
-    <div v-for="(div, index) in divs" :key="index" class="putcen">
-      <component :is="div" @a="trya" @b="trya" @c="trya"></component>
+    </div>
+
+    
+    <div v-for="(div, index) in divs" :key="index" class="comofcreate">
+      <component :is="div" @a="trya" @b="trya" @c="trya" @delete="deleteData(index)"></component>
     </div>
 
 
@@ -24,7 +29,7 @@
 
     <el-dialog :visible.sync="previewDialogVisible" title="预览问卷" class="eldialog">
       <div v-for="(item, index) in this.form" :key="index">
-        <div v-if="item.questionType === 0" class="type1">
+        <div v-if="item.questionType === 0" class="type1pre preofcreate">
           <p class="title">单选题：{{ item.title }} </p>
           <el-radio-group
            
@@ -40,7 +45,7 @@
           </el-radio-group>
         </div>
 
-        <div v-else-if="item.questionType ===2" class="type2">
+        <div v-else-if="item.questionType ===2" class="type2pre preofcreate">
           <p class="title">填空题：{{ item.title }} </p>
           <el-input
             
@@ -49,10 +54,10 @@
           ></el-input>
         </div>
 
-        <div v-if="item.questionType === 1" class="type3">
+        <div v-if="item.questionType === 1" class="type3pre preofcreate">
           <p class="title"> 多选题：{{ item.title }} </p>
           <el-checkbox-group
-          
+          v-model="ddd"
             class="checkboxgroup"
           >
             <el-checkbox
@@ -76,8 +81,104 @@
 
 
   </div>
+  </div>
+  </div>
 </template>
+<style>
+#allofcreate{
+  background-image: url("@/assets/image/ice.jpg"); 
+  background-size: cover;
+/* background-color: aquamarine; */
 
+/* display: flex;
+justify-content: center;
+
+
+  place-items: center;
+   */
+min-height: 600px;
+}
+#btngroup{
+  margin:0 auto;
+
+}
+.preofcreate{
+
+  margin:0 auto;
+}
+.comofcreate{
+padding: 0;
+margin:0 auto;
+background-color: aqua;
+}
+.eldialog{
+display: flex;
+height: auto;
+width: 80%;
+text-align: center;
+justify-content: center;
+align-items: center;
+margin:0 auto;
+}
+
+#titleinput {
+  width: 600px;
+}
+
+
+
+#create {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* text-align: center; */
+  
+  /* color: #2c3e50; */
+  margin:0 auto;
+  /* display: flex;  */
+  flex-wrap: wrap;
+
+  align-content: center;
+
+  width: 620px;
+  min-height: 600px;
+  background-image: url("@/assets/image/冰雪.jpg"); 
+  background-size: cover;
+  /* background-color: black; */
+ 
+}
+.type1pre {
+  background-color: #F0FFFF;
+  /* position: relative;
+  
+  margin-left: 40%; */
+  border: #2c3e50 1px solid;
+  border-radius: 4px
+  
+
+}
+
+.type2pre {
+  background-color: #F0FFF0;
+  /* position: relative;
+ 
+  margin-left: 40%; */
+  border: #2c3e50 1px solid;
+  border-radius: 4px
+}
+
+.type3pre {
+  background-color: #F8F8FF;
+  /* position: relative;
+ 
+  margin-left: 40%; */
+  border: #2c3e50 1px solid;
+  border-radius: 4px
+
+
+}
+
+</style>
 <script>
 import axios from "axios";
 import selectdiv from "../smallcomponents/selectdiv.vue";
@@ -85,6 +186,8 @@ import xiala from "../smallcomponents/xiala.vue";
 import fillin from "../smallcomponents/fillin.vue";
 import single from "../smallcomponents/single.vue";
 import duoxuan from "../smallcomponents/duoxuan.vue";
+import Vue from 'vue';
+import Header from "../smallcomponents/header.vue"
 
 export default {
   components: {
@@ -93,12 +196,15 @@ export default {
     fillin,
     single,
     duoxuan,
+    Header,
+    
   },
   data() {
     return {
+    
       divs: [],
       previewDialogVisible: false,
-      
+      ddd:[],
       questionnaire: {
         id: "",
         title: "",
@@ -112,6 +218,23 @@ export default {
     };
   },
   methods: {
+    test(){
+      console.log(JSON.stringify(this.form));
+    },
+    deleteData(index) {
+
+      let n = index
+      console.log(index);
+      // console.log(n);
+      // this.form[n]=null
+      // this.divs[n]=""
+      Vue.delete(this.form, index);
+      Vue.delete(this.divs, index);
+      console.log(index);
+
+    // this.form.splice(index, 1);
+    // this.divs.splice(index, 1);
+  },
    preview() {
       this.questionnaire.questionList = this.form;
      this.previewDialogVisible = true;
@@ -186,37 +309,7 @@ export default {
 };
 </script>
 
-<style>
-.eldialog{
-display: flex;
-height: auto;
-width: 80%;
-text-align: center;
-align-items: center;
-}
 
-#titleinput {
-  width: 600px;
-}
-
-.putcen {
-  position: relative;
-  left: 27%;
-}
-
-#create {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
-  /* display: flex;  */
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-</style>
   
    
  

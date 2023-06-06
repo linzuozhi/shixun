@@ -36,8 +36,12 @@
 </template>
 <script>
 import axios from 'axios'
+import Header from "../smallcomponents/header.vue"
 
 export default {
+ components: {
+   Header
+  }, 
   data() {
     return {
       inputLink: "",

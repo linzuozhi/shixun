@@ -1,6 +1,6 @@
 <template>
   <div id="app" ref="vantaRef" >
-    <Header></Header>
+    <!-- <Header></Header> -->
     <router-link to="/"></router-link>
     <router-view></router-view>
     <!-- <router-link to="/create" class="my-link">创建问卷 </router-link>
@@ -84,12 +84,13 @@ export default {
 <style>
 
 #app {
-  /* height: 1280px; */
+  
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  /* min-width: 800px; */
   min-height: 800px;
   /* background-image: url("@/assets/logo.png"); */
   background-size: cover;
@@ -101,42 +102,7 @@ export default {
   height: 0vh; */
 
 }
-.my-link {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px;
-  text-decoration: none;
-  color: #333;
-  border-radius: 50%;
-  min-width: 50px;
-  min-height: 50px;
-}
 
-.my-link:hover {
-  background-color: #ddd;
-  font-size: 18px;
-}
 
-/* .my-link {
-  color: #333;
-  text-decoration: none;
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: bold;
-  margin: 10px;
-}
 
-.my-link:hover {
-  background-color: #ddd;
-  font-size: 18px;
-} */
 </style>

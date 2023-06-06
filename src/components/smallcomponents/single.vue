@@ -86,18 +86,19 @@ export default {
 <style>
 .container {
   width: 600px;
-  height: auto;
-  background-color: #fff;
+  
+  /* background-color: #30a85e; */
   /* border: 1px solid #ccc; */
-  margin: 10px;
-  padding: 10px;
+  /* margin-top: 10px; */
+ 
+ padding: 0px;
   box-sizing: border-box;
 }
 
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .content {
@@ -112,7 +113,7 @@ export default {
 border: 1px solid #ccc; /* 修改边框样式 */
 background-color: #f5f5f5; /* 修改背景色 */
 border-radius: 5px; /* 添加圆角效果 */
-padding: 10px; /* 添加内边距 */
+padding: 10px; 
 font-size: 16px; /* 修改字体大小 */
 font-family: Arial, sans-serif; /* 修改字体 */
 position: relative;
