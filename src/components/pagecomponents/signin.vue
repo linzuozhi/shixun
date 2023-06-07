@@ -1,6 +1,6 @@
 <template>
   <div id="total">
-<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace;">Welcome to QSTAR</div>
+<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace; ">Welcome to QSTAR</div>
     <div id="window">
 
       <div id="smallwindow">
@@ -20,6 +20,7 @@
 
       </div>
     </div>
+    <span></span>
   </div>
 </template>
 
@@ -134,12 +135,28 @@ html, body {
   justify-content: center;
   align-items: center;
   border:1px solid rgb(208, 218, 220);
-        box-shadow: 0 0 25px #2094bb;
+        box-shadow: 0 0 10px #2094bb;
         border-radius: 15px;
+        animation: floatUp 1s ease-in-out forwards;
+        
 }
-
+@keyframes floatUp {
+  0% {
+    transform: translateY(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+#window:hover {
+  
+  box-shadow: 0 0 20px #2094bb;
+}
 #smallwindow {
   margin: auto;
 
 }
+
 </style>

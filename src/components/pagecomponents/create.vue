@@ -19,7 +19,7 @@
     ></el-input>
     </div>
 
-    
+   
     <div v-for="(div, index) in divs" :key="index" class="comofcreate">
       <component :is="div" @a="trya" @b="trya" @c="trya" @delete="deleteData(index)"></component>
     </div>
@@ -84,7 +84,150 @@
   </div>
   </div>
 </template>
-<style>
+
+<script>
+import axios from "axios";
+import selectdiv from "../smallcomponents/selectdiv.vue";
+import xiala from "../smallcomponents/xiala.vue";
+import fillin from "../smallcomponents/fillin.vue";
+import single from "../smallcomponents/single.vue";
+import duoxuan from "../smallcomponents/duoxuan.vue";
+import Vue from 'vue';
+import Header from "../smallcomponents/header.vue"
+
+export default {
+  components: {
+    selectdiv,
+    xiala,
+    fillin,
+    single,
+    duoxuan,
+    Header,
+    
+  },
+  
+  data() {
+    return {
+    sss:"",
+      divs: [],
+      previewDialogVisible: false,
+      ddd:[],
+      questionnaire: {
+        id: "",
+        title: "",
+        description: "",
+        questionList: [],
+      },
+      jsonData: {
+      
+      },
+      form: [],
+    };
+  },
+  methods: {
+    test(){
+      console.log(JSON.stringify(this.divs));
+      console.log(JSON.stringify(this.form));
+
+    },
+    deleteData(index) {
+     
+      // console.log(n);
+      // this.form[n]=null
+      // this.divs[n]=""
+      console.log(index);
+      this.divs.splice(index, 1);
+       this.form.splice(index, 1);      
+      // Vue.delete(this.form, this.sss);
+      // Vue.delete(this.divs, this.sss);
+   
+
+
+   
+   
+  },
+   preview() {
+      this.questionnaire.questionList = this.form;
+     this.previewDialogVisible = true;
+},
+    trya(data) {
+      const isDuplicate = this.form.some(
+          (item) => JSON.stringify(item) === JSON.stringify(data)
+      );
+      if (!isDuplicate) {
+        this.form.push(data);
+        const index = this.form.length - 1;
+        data.id = index;
+      } else {
+        const index = this.form.findIndex(
+            (item) => JSON.stringify(item) === JSON.stringify(data)
+        );
+        if (index !== -1) {
+          this.form.splice(index, 1, data);
+        }
+      }
+    },
+addp1(){
+  this.divs.push('<p>1</p>');
+},
+addp2(){
+  this.divs.push('<p>2</p>');
+},
+    addDiv1() {
+      this.divs.push("single");
+
+    },
+    addDiv2() {
+     
+      this.divs.push("fillin");
+
+    },
+    addDiv3() {
+      this.divs.push("duoxuan");
+
+    },
+
+    shanchu() {
+      this.divs.pop();
+      this.form.pop();
+    },
+
+    submitData() {
+      this.questionnaire.questionList = this.form;
+      axios
+          .post("http://localhost:9090/create", this.questionnaire)
+          .then((response) => {
+            let id = response.data;
+
+            localStorage.setItem("id", id);
+            const qsid = localStorage.getItem("id");
+            const username = localStorage.getItem("username");
+            let link = "localhost:9090/login?id=" + qsid + "&username=" + username;
+            console.log(link);
+            localStorage.setItem("link", link);
+            this.$alert("问卷链接为：" + link, "分享问卷", {
+              confirmButtonText: "复制链接",
+              callback: () => {
+                this.$copyText(link)
+
+                this.$router.push("login");
+
+                // 在这里处理复制链接的逻辑
+              }
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+    },
+  },
+};
+</script>
+
+
+  <style>
+
 #allofcreate{
   background-image: url("@/assets/image/ice.jpg"); 
   background-size: cover;
@@ -179,137 +322,5 @@ margin:0 auto;
 }
 
 </style>
-<script>
-import axios from "axios";
-import selectdiv from "../smallcomponents/selectdiv.vue";
-import xiala from "../smallcomponents/xiala.vue";
-import fillin from "../smallcomponents/fillin.vue";
-import single from "../smallcomponents/single.vue";
-import duoxuan from "../smallcomponents/duoxuan.vue";
-import Vue from 'vue';
-import Header from "../smallcomponents/header.vue"
-
-export default {
-  components: {
-    selectdiv,
-    xiala,
-    fillin,
-    single,
-    duoxuan,
-    Header,
-    
-  },
-  data() {
-    return {
-    
-      divs: [],
-      previewDialogVisible: false,
-      ddd:[],
-      questionnaire: {
-        id: "",
-        title: "",
-        description: "",
-        questionList: [],
-      },
-      jsonData: {
-      
-      },
-      form: [],
-    };
-  },
-  methods: {
-    test(){
-      console.log(JSON.stringify(this.form));
-    },
-    deleteData(index) {
-
-      let n = index
-      console.log(index);
-      // console.log(n);
-      // this.form[n]=null
-      // this.divs[n]=""
-      Vue.delete(this.form, index);
-      Vue.delete(this.divs, index);
-      console.log(index);
-
-    // this.form.splice(index, 1);
-    // this.divs.splice(index, 1);
-  },
-   preview() {
-      this.questionnaire.questionList = this.form;
-     this.previewDialogVisible = true;
-},
-    trya(data) {
-      const isDuplicate = this.form.some(
-          (item) => JSON.stringify(item) === JSON.stringify(data)
-      );
-      if (!isDuplicate) {
-        this.form.push(data);
-        const index = this.form.length - 1;
-        data.id = index;
-      } else {
-        const index = this.form.findIndex(
-            (item) => JSON.stringify(item) === JSON.stringify(data)
-        );
-        if (index !== -1) {
-          this.form.splice(index, 1, data);
-        }
-      }
-    },
-
-    addDiv1() {
-      this.divs.push("single");
-
-    },
-    addDiv2() {
-     
-      this.divs.push("fillin");
-
-    },
-    addDiv3() {
-      this.divs.push("duoxuan");
-
-    },
-
-    shanchu() {
-      this.divs.pop();
-      this.form.pop();
-    },
-
-    submitData() {
-      this.questionnaire.questionList = this.form;
-      axios
-          .post("http://localhost:9090/create", this.questionnaire)
-          .then((response) => {
-            let id = response.data;
-
-            localStorage.setItem("id", id);
-            const qsid = localStorage.getItem("id");
-            const username = localStorage.getItem("username");
-            let link = "localhost:9090/login?id=" + qsid + "&username=" + username;
-            console.log(link);
-            localStorage.setItem("link", link);
-            this.$alert("问卷链接为：" + link, "分享问卷", {
-              confirmButtonText: "复制链接",
-              callback: () => {
-                this.$copyText(link)
-
-                this.$router.push("login");
-
-                // 在这里处理复制链接的逻辑
-              }
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-    },
-  },
-};
-</script>
-
-
-  
    
  

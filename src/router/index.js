@@ -29,18 +29,18 @@ routes:[{path:'/',component:signin},
 
 });
 
-// router.beforeEach((to, from, next) => {
-//     const isAuthenticated = localStorage.getItem("username");
-//     if (to.matched.some(record => record.meta.requiresAuth)) {
-//       if (isAuthenticated) {
-//         next();
-//       } else {
-//         alert("请先登录")
+router.beforeEach((to, from, next) => {
+    const isAuthenticated = localStorage.getItem("username");
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (isAuthenticated) {
+        next();
+      } else {
+        alert("请先登录")
     
-//         next({ name: "signin" });
-//       }
-//     } else {
-//       next();
-//     }
-//   });
+        next({ name: "signin" });
+      }
+    } else {
+      next();
+    }
+  });
 export default router

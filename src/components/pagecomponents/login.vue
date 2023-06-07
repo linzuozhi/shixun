@@ -1,13 +1,17 @@
 <template>
-  <div id="total">
-    
-    <el-input v-model="inputLink" placeholder="请输入链接"></el-input>
-    <el-button type="primary" @click="submitLink">提交</el-button>
+  <div>
+    <Header></Header>
+    <div id="biggestoflogin">
+       <el-input v-model="inputLink" placeholder="请输入链接" style="width: 600px;"></el-input>
+    <el-button type="primary" @click="submitLink" style="margin-left: 10px;">提交</el-button>
     <el-button type="primary" @click="submitData">完成填写</el-button>
+  <div id="totaloflogin">
+    
+   
     <span>{{ this.title }}</span>
     <div v-for="(item, index) in jsonData.questionList" :key="index">
 
-      <div v-if="item.questionType === 0" class="type1">
+      <div v-if="item.questionType === 0" class="type1 typeofloginanswer">
         <p class="title">单选题：{{ item.title }} </p>
         <el-radio-group v-model="questiondata[index].selectedOptionIndex" class="radiogroup">
           <el-radio v-for="(option, i) in item.optionsof" :key="i" :label="i" class="radio-item"> {{ option }}
@@ -15,25 +19,130 @@
         </el-radio-group>
       </div>
 
-      <div v-else-if="item.questionType ===2" class="type2">
+      <div v-else-if="item.questionType ===2" class="type2 typeofloginanswer">
         <p class="title">填空题：{{ item.title }} </p>
         <el-input v-model="questiondata[index].description" :placeholder="item.description"
                   style="background-color: #FFFAFA;"></el-input>
       </div>
 
-      <div v-if="item.questionType === 1" class="type3">
+      <div v-if="item.questionType === 1" class="type3 typeofloginanswer">
         <p class="title"> 多选题：{{ item.title }} </p>
         <el-checkbox-group v-model="questiondata[index].selectedOptionIndex" class="checkboxgroup">
-          <el-checkbox v-for="(option, i) in item.optionsof" :key="i" :label="i">{{ option }}
+          <el-checkbox v-for="(option, i) in item.optionsof" :key="i" :label="i" class="checkbox-item">{{ option }}
           </el-checkbox>
         </el-checkbox-group>
       </div>
 
     </div>
-
-
+</div>
+</div>
   </div>
 </template>
+<style>
+#biggestoflogin{
+/* background-color: #2c3e50; */
+background-image: url("@/assets/image/valentin-bolder-BZOtLUdDcoU-unsplash.jpg");
+background-size: cover;
+min-height: 800px;
+
+}
+#totaloflogin {
+  padding: 0;
+  margin: 0 auto;
+  height: auto;
+ width: 612px;
+ min-height: 800px;
+  /* position: relative; */
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("@/assets/image/pexels-anete-lusina-16621377.jpg");
+background-size: cover;
+  border:3px solid rgb(208, 218, 220);
+        box-shadow: 0 0 15px #0c0cd7;
+        border-radius: 6px;
+/* display: flex;
+justify-content: center;
+align-content: center; */
+}
+.typeofloginanswer{
+
+  margin: 0 auto;
+  margin-top: 15px;
+  width: 600px;
+  min-height:75px;
+  
+ 
+}
+.type1 {
+  background-color: #F0FFFF;
+  
+  border:1px solid rgb(208, 218, 220);
+        box-shadow: 0 0 5px #F0FFFF;
+        border-radius: 6px;
+
+  
+
+}
+
+.type2 {
+  background-color: #F0FFF0;
+  border:1px solid rgb(208, 218, 220);
+        box-shadow: 0 0 5px #F0FFF0;
+        border-radius: 6px;
+}
+
+.type3 {
+  background-color: #F8F8FF;
+  border:1px solid rgb(208, 218, 220);
+        box-shadow: 0 0 5px #F8F8FF;
+        border-radius: 6px;
+
+
+}
+
+.radiogroup {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  margin-left: 5px;
+
+}
+
+.checkboxgroup {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
+  margin-top: 10px;
+  margin-left: 5px;
+
+}
+
+.title {
+  margin-top: 5px;
+  text-align: left;
+  margin-left: 10px;
+  /* text-decoration:underline */
+
+}
+
+.radio-item {
+  display: flex;
+  margin-bottom: 3px;
+
+}
+.checkbox-item {
+  display: flex;
+ 
+
+}
+</style>
+
+
 <script>
 import axios from 'axios'
 import Header from "../smallcomponents/header.vue"
@@ -121,6 +230,7 @@ export default {
               this.inputValue = '';
             } else {
               this.jsonData = response.data;
+              console.log(response.data);
               for (const item of this.jsonData.questionList) {
                 if (item.questionType === 0) {
                   // 添加单选题对象
@@ -177,84 +287,4 @@ export default {
   },
 }
 </script>
-
-<style>
-#total {
-  height: auto;
-  width: 900px;
-  position: relative;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-.type1 {
-  background-color: #F0FFFF;
-  position: relative;
-  /* left: 0px; */
-  /* align-items: center; */
-  margin-left: 40%;
-  border: #2c3e50 1px solid;
-  border-radius: 4px
-  /* display: flex; */
-  /* align-items: flex-start; */
-
-}
-
-.type2 {
-  background-color: #F0FFF0;
-  position: relative;
-  /* left: 0px; */
-  /* align-items: center; */
-  margin-left: 40%;
-  border: #2c3e50 1px solid;
-  border-radius: 4px
-}
-
-.type3 {
-  background-color: #F8F8FF;
-  position: relative;
-  /* left: 0px; */
-  /* align-items: center; */
-  margin-left: 40%;
-  border: #2c3e50 1px solid;
-  border-radius: 4px
-
-
-}
-
-.radiogroup {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 10px;
-  margin-left: 5px;
-
-}
-
-.checkboxgroup {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 10px;
-  margin-left: 5px;
-
-}
-
-.title {
-  margin-top: 5px;
-  text-align: left;
-  margin-left: 10px;
-  /* text-decoration:underline */
-
-}
-
-.radio-item {
-  display: flex;
-  margin-bottom: 10px;
-
-}
-
-</style>
 

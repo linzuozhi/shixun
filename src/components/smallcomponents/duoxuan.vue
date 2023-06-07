@@ -1,6 +1,8 @@
 
   <template>
   <div class="container">
+    <el-button type="primary" @click="deleteSelf"></el-button>
+
     <div class="header">
       <input
         type="text"
@@ -74,6 +76,10 @@ export default {
       this.options.pop();
       this.duoxuanpac.optionsof.pop()
     },
+    deleteSelf() {
+    // 发送删除事件，通知父组件删除对应的数据
+    this.$emit('delete','' );
+  },
    
   },
 };
