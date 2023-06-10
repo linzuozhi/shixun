@@ -72,12 +72,14 @@ export default {
           })
               .then((response) => {
                 if (response.data === 1) {
+                  
                   console.log("登录成功");
                   localStorage.setItem("username", this.form.username);
                   const username = localStorage.getItem("username");
                   console.log(username);
                   this.$router.push("/home");
                   location.reload();
+                  
                 } else {
                   this.$message.error("用户名或密码错误");
                 }
@@ -138,7 +140,7 @@ html, body {
         box-shadow: 0 0 10px #2094bb;
         border-radius: 15px;
         animation: floatUp 1s ease-in-out forwards;
-        
+       
 }
 @keyframes floatUp {
   0% {
@@ -148,6 +150,16 @@ html, body {
   100% {
     transform: translateY(0);
     opacity: 1;
+  }
+}
+@keyframes divDisappear {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20%);
+    opacity: 0;
   }
 }
 #window:hover {

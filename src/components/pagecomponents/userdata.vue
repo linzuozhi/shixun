@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Header></Header>
+
     <div class="wrapper">
       <!-- 左侧导航栏 -->
       <el-aside width="200px">
@@ -13,36 +16,61 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-  
+
       <!-- 右侧内容 -->
       <el-main>
         <!-- 已创建问卷 -->
         <div v-if="activeName === 'created'" class="section">
+          <div v-for="(item, index) in userdata.quescreated" :key="index">
+            <h2>{{ item.title }}</h2>
+            <h2>id:{{ item.id }}</h2>
+            <div class="numbers"></div>
 
-            <div v-for="(item,index) in userdata.quescreated" :key="index" >      
-            <h2>{{ item }}</h2>
-          <div class="numbers">{{ createdCount }}</div>
-          
-          <el-button type="danger" >删除</el-button>
-          <el-button >查看结果</el-button>
-             </div>
+            <el-button type="danger" @click="delquestionnaire(item.id)">删除</el-button>
+            <el-button @click="getresult(item.id)">查看结果</el-button>
+          </div>
         </div>
-  
+
         <!-- 已填写问卷 -->
         <div v-if="activeName === 'filled'" class="section">
-            <div v-for="(item,index) in userdata.quesanswered" :key="index" >    
-          <h2>{{ item }}</h2>
-          <div class="numbers">{{ filledCount }}</div>
-          <el-button >查看</el-button>
-        </div>
+          <div v-for="(item, index) in userdata.quesanswered" :key="index">
+            <h2>{{ item.title }}</h2>
+            <h2>id:{{ item.id }}</h2>
+            <div class="numbers"></div>
+            <el-button @click="getresult(item.id)">查看</el-button>
+          </div>
         </div>
       </el-main>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
-  export default {
-    props: {
+import axios from "axios";
+import Header from "../smallcomponents/header.vue";
+export default {
+  components: {
+    Header,
+  },
+
+  mounted() {
+    const username = localStorage.getItem("username");
+    console.log(username);
+    axios
+      .post("http://localhost:9090/getuserdata", username)
+      .then((response) => {
+        if (response.data === 0) {
+          alert("获取用户信息失败");
+        } else {
+          this.userdata = response.data;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  },
+  data() {
+    return {
       createdCount: {
         type: Number,
         required: true,
@@ -51,63 +79,74 @@
         type: Number,
         required: true,
       },
-    },
-    data() {
-      return {
-        userdata:{
-username:"",
+      userdata: {
+        username: "",
 
-quescreated:[
-    {id :0,
-title:""}]
-,
-quesanswered:[1,2,3],
-        },
-        activeName: 'created',
-
-      };
-    },
-    methods: {
-      handleSelect(name) {
-        this.activeName = name;
+        quescreated: [{ id: 417486039023770, title: "abc" }],
+        quesanswered: [{ id: 417486039023770, title: "abc" }],
       },
+      activeName: "created",
+    };
+  },
+  methods: {
+    getresult(id) {
+     
 
+      let link4usercheck =
+        "localhost:9090/login?id=" + id + "&username=" + this.userdata.username;
+      localStorage.setItem("link4usercheck", link4usercheck);
+      this.$router.push("login");
     },
-  };
-  </script>
+    handleSelect(name) {
+      this.activeName = name;
+    },
+    delquestionnaire(id){
+        let link4usercheck =
+        "localhost:9090/login?id=" + id + "&username=" + this.userdata.username;
+        axios
+      .post("http://localhost:9090/delete", link4usercheck)
+      .then((response) => {
+        this.$message.success('删除成功')
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    },
+  },
+};
+</script>
   
   <style scoped>
-  .wrapper {
-    display: flex;
+.wrapper {
+  display: flex;
   min-height: 800px;
-  }
-  .el-aside {
-    background-color: #f5f5f5;
-    padding: 20px;
-  }
-  .el-main {
-    margin-left: 20px;
-    padding: 20px;
-  }
-  .section {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
+}
+.el-aside {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+.el-main {
+  margin-left: 20px;
+  padding: 20px;
+}
+.section {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
 
-
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
-  }
-  .section h2 {
-    margin-top: 0;
-  }
-  .section .numbers {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  </style>
+}
+.section h2 {
+  margin-top: 0;
+}
+.section .numbers {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+</style>

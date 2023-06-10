@@ -1,6 +1,6 @@
 <template>
   <div class="center">
-    <el-button type="primary" @click="deleteSelf"></el-button>
+    <!-- <el-button type="primary" @click="deleteSelf"></el-button> -->
     <el-input placeholder="请输入问题" v-model="fillinpac.title" @change="both"></el-input>
     <el-input
       placeholder="请输入答题提示（可空）"

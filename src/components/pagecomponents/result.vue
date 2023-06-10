@@ -1,8 +1,13 @@
 <template>
-  <div>
+  <div >
     <Header></Header>
-    <el-input v-model="inputLink" placeholder="请输入链接以查看结果"></el-input>
+    
+    <div>
+    <el-input v-model="token.inputLink" placeholder="请输入链接" style="width: 600px;    "></el-input>
+    <el-input v-model="token.permissionCode" placeholder="请输入权限码"  style="width: 600px;    "></el-input>
+
     <el-button icon="el-icon-search" circle @click="submitLink"></el-button>
+    </div>
     <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
     <div v-for="question in dataofwritten.questiondata" :key="question.id">
       <h3 v-if="question.type === 1 || question.type === 0">{{ question.title }}</h3>
@@ -23,15 +28,20 @@
 import * as echarts from 'echarts';
 import axios from 'axios';
 import Header from "../smallcomponents/header.vue"
-
+import userdata from "../pagecomponents/userdata.vue"
 export default {
  components: {
-   Header
+   Header,
+   userdata
   }, 
   data() {
     return {
       jsonData:{},
-      inputLink:"",
+token:{ 
+  inputLink:"",
+    permissionCode:"",
+  },
+     
       dataofwritten: {
         titleofquestionnaire:"",
         questiondata:[],
@@ -39,15 +49,19 @@ export default {
     };
   },
   mounted() {
-   
+    
+
   },
   methods: {
+   
     submitLink() {
-      axios.post("http://localhost:9090/analyze", this.inputLink)
+      axios.post("http://localhost:9090/analyze", this.token)
           .then(response => {
             if (response.data === 0) {
-              alert('链接无效');
-              this.inputValue = '';
+              alert('链接无效或权限码错误');
+              this.token.inputLink = '';
+              this.token.permissionCode = '';
+
             } else {
               this.dataofwritten = response.data;
               this.renderCharts();

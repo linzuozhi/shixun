@@ -1,7 +1,7 @@
 
   <template>
   <div class="container">
-    <el-button type="primary" @click="deleteSelf"></el-button>
+    <!-- <el-button type="primary" @click="deleteSelf"></el-button> -->
 
     <div class="header">
       <input

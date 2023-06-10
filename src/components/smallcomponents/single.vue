@@ -9,7 +9,7 @@
       <el-button @click="delCheckbox" type="primary" class="elebtn" >删除选项</el-button>
       <!-- <el-button @click="submitDuoxuanData" type="primary" class="elebtn" >p</el-button> -->
 
-    </div>
+    </div   >
     <div class="content">
       <div v-for="(option, index) in options" :key="index">
         <input type="checkbox" :id="'option-' + index"  class="posi">
@@ -104,6 +104,7 @@ export default {
 .content {
   overflow-y: auto;
   max-height: 60px;
+  
 }
 
 .content input[type="checkbox"] {

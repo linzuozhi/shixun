@@ -54,6 +54,9 @@ export default {
     duoxuan,
     Header,
   },
+  beforeDestroy() {
+    window.addEventListener('unload', this.handleUnload);
+  },
   data() {
     return {
       // div1: [],
@@ -67,15 +70,9 @@ export default {
  
 //  },
   methods: {
-    // addDiv1() {
-    //   this.div1.push({})
-    // },
-    // addDiv2() {
-    //   this.div2.push({})
-    // },
-    // addDiv3() {
-    //   this.div3.push({})
-    // }
+    handleUnload() {
+      localStorage.removeItem('link4usercheck');
+    }
 
   }
 }

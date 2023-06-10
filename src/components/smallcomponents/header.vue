@@ -40,6 +40,7 @@ username:"",
 },
 
 methods:{
+
   returntohome(){
     const currentRoute = this.$route.path;
   if (currentRoute !== "/home") {

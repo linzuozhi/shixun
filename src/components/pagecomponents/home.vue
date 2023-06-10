@@ -1,14 +1,14 @@
 <template>
   <div id="home">
     <Header></Header>
-    <div id="imageofhome">
+    <div id="imageofhome" style="animation: floatUp 0.4s ease-in-out forwards;">
      
     </div>
-    <div>
-   <router-link to="/create" class="link" id="create-link"> </router-link>
+    <div style="animation: floatUp 0.8s ease-in-out forwards;">
+   <router-link to="/create" class="link" id="create-link" title="创建问卷">  </router-link>
     
-   <router-link to="/login" class="link" id="login-link"> </router-link>
-    <router-link to="/result" class="link" id="result-link"></router-link>
+   <router-link to="/login" class="link" id="login-link" title="填写问卷"> </router-link>
+    <router-link to="/result" class="link" id="result-link" title="查看问卷填写结果"></router-link>
     <router-view></router-view>
     </div>
   </div>
@@ -66,8 +66,10 @@ min-height: 350px;
 
 #login-link:hover {
   background-color: #ddd;
+ 
   /* font-size: 18px; */
 }
+
 #result-link {
  
   background-image: url("@/assets/image/查看.png");

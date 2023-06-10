@@ -68,9 +68,9 @@ align-content: center; */
 .typeofloginanswer{
 
   margin: 0 auto;
-  margin-top: 15px;
+  margin-top: 8px;
   width: 600px;
-  min-height:75px;
+  min-height:60px;
   
  
 }
@@ -151,6 +151,7 @@ export default {
  components: {
    Header
   }, 
+  
   data() {
     return {
       inputLink: "",
@@ -197,10 +198,61 @@ export default {
   },
 
   mounted() {
-
+    const link4usercheck = localStorage.getItem("link4usercheck");
+    axios.post("http://localhost:9090/link", link4usercheck)
+          .then(response => {
+            if (response.data === 0) {
+              alert('链接无效');
+              this.inputValue = '';
+            } else {
+              this.jsonData = response.data;
+              console.log(response.data);
+              for (const item of this.jsonData.questionList) {
+                if (item.questionType === 0) {
+                  // 添加单选题对象
+                  this.questiondata.push({
+                    id: item.id,
+                    questionType: "0",
+                    title: "",
+                    description: "",
+                    optionsof: [],
+                    selectedOptionIndex: [],
+                    answerIndex: -2,
+                  });
+                } else if (item.questionType === 1) {
+                  // 添加多选题对象
+                  this.questiondata.push({
+                    id: item.id,
+                    questionType: "1",
+                    title: "",
+                    description: "",
+                    optionsof: [],
+                    selectedOptionIndex: [],
+                    answerOptionsIndex: [],
+                  });
+                } else if (item.questionType === 2) {
+                  // 添加填空题对象
+                  this.questiondata.push({
+                    id: item.id,
+                    answer: "",
+                    questionType: "2",
+                    description: "",
+                    correctAnswer: ""
+                  });
+                }
+              }
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+          localStorage.removeItem('link4usercheck');
   },
-  methods: {
 
+  methods: {
+    handleUnload() {
+      localStorage.removeItem('link4usercheck');
+    },
     initSendData() {
       this.sendData.id = this.jsonData.id;
       this.sendData.title = this.jsonData.title;
