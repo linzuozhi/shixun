@@ -73,7 +73,7 @@ align-content: center; */
   margin-top: 5px;
   width: 600px;
   min-height:60px;
-  animation: floatUp 1s ease-in-out forwards;
+  animation: slide-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
  
 }
 .type1 {
