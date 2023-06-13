@@ -82,8 +82,8 @@ export default {
       userdata: {
         username: "",
 
-        quescreated: [{ id: 417486039023770, title: "abc" }],
-        quesanswered: [{ id: 417486039023770, title: "abc" }],
+        quescreated: [],
+        quesanswered: [],
       },
       activeName: "created",
     };
@@ -104,9 +104,10 @@ export default {
         let link4usercheck =
         "localhost:9090/login?id=" + id + "&username=" + this.userdata.username;
         axios
-      .post("http://localhost:9090/delete", link4usercheck)
+      .post("http://localhost:9090/delete", id)
       .then((response) => {
         this.$message.success('删除成功')
+        location.reload()
       })
       .catch((error) => {
         console.error(error);

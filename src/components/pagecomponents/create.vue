@@ -71,6 +71,7 @@
               v-for="(option, i) in item.optionsof"
               :key="i"
               :label="i"
+              class="checkbox-item"
               >{{ option }}</el-checkbox
             >
           </el-checkbox-group>
@@ -94,16 +95,9 @@
  <style>
 
 #allofcreate{
-  background-image: url("@/assets/image/ice.jpg"); 
+  background-image: url("@/assets/image/geometric-7719159_1920.png"); 
   background-size: cover;
-/* background-color: aquamarine; */
 
-/* display: flex;
-justify-content: center;
-
-
-  place-items: center;
-   */
 min-height: 800px;
 }
 #btngroupofcreate{
@@ -152,16 +146,14 @@ margin:0 auto;
 
   width: 620px;
   min-height: 800px;
-  background-image: url("@/assets/image/冰雪.jpg"); 
+  background-image: url("@/assets/image/everest-4828404_1920.png"); 
   background-size: cover;
-  /* background-color: black; */
+  
  
 }
 .type1pre {
   background-color: #F0FFFF;
-  /* position: relative;
   
-  margin-left: 40%; */
   border: #2c3e50 1px solid;
   border-radius: 4px
   
@@ -170,18 +162,14 @@ margin:0 auto;
 
 .type2pre {
   background-color: #F0FFF0;
-  /* position: relative;
- 
-  margin-left: 40%; */
+  
   border: #2c3e50 1px solid;
   border-radius: 4px
 }
 
 .type3pre {
   background-color: #F8F8FF;
-  /* position: relative;
  
-  margin-left: 40%; */
   border: #2c3e50 1px solid;
   border-radius: 4px
 

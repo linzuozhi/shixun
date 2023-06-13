@@ -8,13 +8,13 @@
 
     <el-button icon="el-icon-search" circle @click="submitLink"></el-button>
     </div>
-    <h2>{{ dataofwritten.titleofquestionnaire }}</h2>
+    <h2 style="margin-bottom: 20px;margin-top: 10px;font-size: 30px;">{{ dataofwritten.titleofquestionnaire }}</h2>
     <div v-for="question in dataofwritten.questiondata" :key="question.id">
-      <h3 v-if="question.type === 1 || question.type === 0">{{ question.title }}</h3>
+      <h3 v-if="question.type === 1 || question.type === 0" >{{ question.title }}</h3>
       <div v-if="question.type === 1 || question.type === 0" class="chart-container">
         <div :id="'chart' + question.id" style="width: 400px; height: 400px;"></div>
       </div>
-      <h3 v-if="question.type === 2">{{ question.title }}</h3>
+      <h3 v-if="question.type === 2" style="margin-bottom: 15px;">{{ question.title }}</h3>
       <div v-if="question.type === 2">
         <ul class="re-list">
           <li v-for="(answer, index) in question.filldata" :key="index">{{ answer }}</li>
@@ -41,7 +41,7 @@ token:{
   inputLink:"",
     permissionCode:"",
   },
-     
+
       dataofwritten: {
         titleofquestionnaire:"",
         questiondata:[],
@@ -50,7 +50,6 @@ token:{
   },
   mounted() {
     
-
   },
   methods: {
    
@@ -117,19 +116,35 @@ token:{
 </script>
 
 <style>
+
 .re-list {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.re-list li {
-  font-size: 16px;
-  color: #333;
-  line-height: 1.5; /* 修改行高，增加间距 */
-  margin-bottom: 10px; /* 增加每项之间的间距 */
-}
-
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .re-list li {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    margin: 0 auto 10px auto;
+    /* margin-bottom: 10px; */
+    width: 600px;
+    transition: transform 0.2s ease-in-out;
+    animation: slide-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .re-list li:hover {
+    transform: scale(1.1);
+  }
+  @keyframes slide-in {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 .chart-container {
   display: flex;
   justify-content: center;

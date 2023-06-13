@@ -1,6 +1,6 @@
 <template>
   <div id="total">
-<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace; ">Welcome to QSTAR</div>
+<div style="font-size: 75px;font-family: 'Courier New', Courier, monospace; margin-bottom: 30px;">Welcome to QSTAR</div>
     <div id="window">
 
       <div id="smallwindow">
@@ -109,7 +109,7 @@ html, body {
   padding: 0;
 }
 #total {
-  background-image: url("@/assets/image/pexels-anete-lusina-16621377.jpg"); 
+  background-image: url("@/assets/image/sofa-7939061_1920.png"); 
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -118,29 +118,21 @@ html, body {
   padding: 0;
 }
 
-/* #window {
-  margin-top: 100px;
-  margin-left: 400px;
-  width: 500px;
-  height: 400px;
- 
-  position: relative;
-  display: flex;
-} */
+
 
 #window {
   margin: 0 auto;
   width: 500px;
   height: 400px;
-  background-color: #F0FFFF;
+  background-color:  #F5F5F5;
   display: flex;
   justify-content: center;
   align-items: center;
   border:1px solid rgb(208, 218, 220);
         box-shadow: 0 0 10px #2094bb;
-        border-radius: 15px;
+        border-radius: 22px;
         animation: floatUp 1s ease-in-out forwards;
-       
+        
 }
 @keyframes floatUp {
   0% {
@@ -166,9 +158,6 @@ html, body {
   
   box-shadow: 0 0 20px #2094bb;
 }
-#smallwindow {
-  margin: auto;
 
-}
 
 </style>

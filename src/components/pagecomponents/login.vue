@@ -8,7 +8,7 @@
   <div id="totaloflogin">
     
    
-    <span>{{ this.title }}</span>
+    <h2 id="titleofquesoflogin">{{ this.jsonData.title }}</h2>
     <div v-for="(item, index) in jsonData.questionList" :key="index">
 
       <div v-if="item.questionType === 0" class="type1 typeofloginanswer">
@@ -41,7 +41,7 @@
 <style>
 #biggestoflogin{
 /* background-color: #2c3e50; */
-background-image: url("@/assets/image/valentin-bolder-BZOtLUdDcoU-unsplash.jpg");
+background-image: url("@/assets/image/wind-7595553_1920.png");
 background-size: cover;
 min-height: 800px;
 
@@ -56,11 +56,13 @@ min-height: 800px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("@/assets/image/pexels-anete-lusina-16621377.jpg");
+  background-image: url("@/assets/image/lemon-8006238_1920.jpg");
 background-size: cover;
   border:3px solid rgb(208, 218, 220);
-        box-shadow: 0 0 15px #0c0cd7;
+        box-shadow: 0 0 5px #baf9c5;
         border-radius: 6px;
+        animation: floatUp 1s ease-in-out forwards;
+        
 /* display: flex;
 justify-content: center;
 align-content: center; */
@@ -68,10 +70,10 @@ align-content: center; */
 .typeofloginanswer{
 
   margin: 0 auto;
-  margin-top: 8px;
+  margin-top: 5px;
   width: 600px;
   min-height:60px;
-  
+  animation: floatUp 1s ease-in-out forwards;
  
 }
 .type1 {
@@ -138,6 +140,18 @@ align-content: center; */
 .checkbox-item {
   display: flex;
  
+
+}
+#titleofquesoflogin{
+  font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
 
 }
 </style>
@@ -266,7 +280,8 @@ export default {
       axios.post('http://localhost:9090/result', this.sendData)
           .then(response => {
             console.log(response.data)
-
+            this.$message.success("填写完成，填写结果已提交，即将跳转至首页")
+            this.$router.push("home")
           })
           .catch(error => {
             console.log(error)
